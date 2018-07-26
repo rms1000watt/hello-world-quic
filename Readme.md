@@ -34,7 +34,7 @@ docker-compose up -d
 ## cURL
 
 ```bash
-go run main.go curl --cacert certs/ca.crt https://localhost:7100/
+./hello-world-quic curl --cacert certs/ca.crt https://localhost:7100/
 ```
 
 ## Chrome
