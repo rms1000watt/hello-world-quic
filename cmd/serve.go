@@ -1,0 +1,36 @@
+package cmd
+
+import (
+	"github.com/rms1000watt/hello-world-quic/serve"
+
+	"github.com/spf13/cobra"
+)
+
+var serveCmd = &cobra.Command{
+	Use:     "serve",
+	Short:   "Start the server",
+	Long:    `Start the server`,
+	Example: `./hello-world-quic serve`,
+	Run:     serveFunc,
+}
+
+var serveCfg serve.Config
+
+func init() {
+	rootCmd.AddCommand(serveCmd)
+
+	serveCmd.Flags().StringVar(&serveCfg.Host, "host", "", "Host to listen on")
+	serveCmd.Flags().IntVar(&serveCfg.Port, "port", 7100, "Port to listen on")
+
+	serveCmd.Flags().StringVar(&serveCfg.CertsPath, "certs-path", "certs", "Certs path where the Private/Public key live")
+	serveCmd.Flags().StringVar(&serveCfg.CertName, "cert-name", "server.crt", "Public key name")
+	serveCmd.Flags().StringVar(&serveCfg.KeyName, "key-name", "server.key", "Private key name")
+
+	setFlagsFromEnv(serveCmd)
+}
+
+func serveFunc(cmd *cobra.Command, args []string) {
+	configureLogging()
+
+	serve.Serve(serveCfg)
+}

@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  hello-world-quic:
+    container_name: hello-world-quic
+    command: serve
+    environment:
+      PORT: 7100
+      LOG_LEVEL: debug
+      CERTS_PATH: /certs
+    image: rms1000watt/hello-world-quic:latest
+    ports:
+    - 7100:7100/udp
+    volumes:
+    - ./certs:/certs
