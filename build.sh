@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# rm -rf certs &> /dev/null
 mkdir certs &> /dev/null
 
 set -e
